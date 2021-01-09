@@ -5,4 +5,9 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MiniProfiler.Providers.RavenDB" Version="4.2.22" />
+      <PackageReference Include="RavenDB.Client" Version="5.1.2" />
+    </ItemGroup>
+
 </Project>
