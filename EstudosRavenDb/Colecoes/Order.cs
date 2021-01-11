@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace EstudosRavenDb
+namespace EstudosRavenDb.Colecoes
 {
-    public class Pedido
+    public class Order
     {
+        public string Id { get; set; }
         public string Company { get; set; }
         public string Employee { get; set; }
         public double Freight { get; set; }

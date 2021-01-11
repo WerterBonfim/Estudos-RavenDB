@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using EstudosRavenDb.Colecoes;
 using Raven.Client.Documents;
 
 namespace EstudosRavenDb
@@ -16,7 +17,9 @@ namespace EstudosRavenDb
             //VerificaSeUmDocumentoECarregandoUmaVezEmUmaSessao();
             //CarregandoVariosDocumentos();
             //CarregarDocumentosRelacionados();
-            OrderExplorer();
+            //OrderExplorer();
+
+            new CompanyOrdersExplorer().Start();
         }
 
         private static void OrderExplorer()
@@ -51,7 +54,7 @@ namespace EstudosRavenDb
             using var session = DocumentStoreHolder.Store.OpenSession();
 
             var pedido = session
-                .Include<Pedido>(x => x.Company)
+                .Include<Order>(x => x.Company)
                 .Include(x => x.Employee)
                 .Include(o => o.Lines.Select(l => l.Product))
                 .Load($"orders/{numeroPedido}-A");

@@ -1,4 +1,4 @@
-namespace EstudosRavenDb
+namespace EstudosRavenDb.Colecoes
 {
     public class Categoria
     {

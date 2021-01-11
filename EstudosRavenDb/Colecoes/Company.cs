@@ -1,4 +1,4 @@
-namespace EstudosRavenDb
+namespace EstudosRavenDb.Colecoes
 {
     internal class Company
     {

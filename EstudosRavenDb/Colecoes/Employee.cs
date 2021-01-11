@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EstudosRavenDb
+namespace EstudosRavenDb.Colecoes
 {
     internal class Employee
     {
