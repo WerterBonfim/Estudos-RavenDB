@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using EstudosRavenDb.Colecoes;
 using Raven.Client.Documents;
+using Raven.Client.Documents.Session;
 
 namespace EstudosRavenDb
 {
@@ -38,12 +40,8 @@ namespace EstudosRavenDb
 
             using var session = DocumentStoreHolder.Store.OpenSession();
 
-            var pedidos = (
-                from pedido in session.Query<Order>()
-                    .Include(p => p.Company)
-                where pedido.Company == referenciaDaCompanhia
-                select pedido
-            ).ToList();
+            var pedidos = BuscarViaRQL(session, referenciaDaCompanhia);
+            //var pedidos = BuscaViaLinq(session, referenciaDaCompanhia);
 
             var companhia = session.Load<Company>(referenciaDaCompanhia);
             if (companhia == null)
@@ -59,6 +57,31 @@ namespace EstudosRavenDb
                 Console.WriteLine($"\t{pedido.Id} - {pedido.OrderedAt}");
                 
             }
+        }
+
+        private static List<Order> BuscaViaLinq(IDocumentSession session, string referenciaDaCompanhia)
+        {
+            var pedidos = (
+                from pedido in session.Query<Order>()
+                    .Include(p => p.Company)
+                where pedido.Company == referenciaDaCompanhia
+                select pedido
+            ).ToList();
+            return pedidos;
+        }
+
+        private static List<Order> BuscarViaRQL(IDocumentSession session, string referenciaDaCompanhia)
+        {
+            var query =
+                $"from Orders " +
+                $"where Company == $companyId " +
+                $"include Company";
+
+            var pedidos = session.Advanced
+                .RawQuery<Order>(query)
+                .AddParameter("companyId", referenciaDaCompanhia)
+                .ToList();
+            return pedidos;
         }
     }
 }

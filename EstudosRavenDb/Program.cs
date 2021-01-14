@@ -19,7 +19,9 @@ namespace EstudosRavenDb
             //CarregarDocumentosRelacionados();
             //OrderExplorer();
 
-            new CompanyOrdersExplorer().Start();
+            //new CompanyOrdersExplorer().Start();
+            //new CrudDocuments().Start();
+            new ContractsManager().Start();
         }
 
         private static void OrderExplorer()

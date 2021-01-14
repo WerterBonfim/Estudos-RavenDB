@@ -10,4 +10,16 @@
       <PackageReference Include="RavenDB.Client" Version="5.1.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="ContractsManagerApp\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ContractsManagerApp\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ContractsManagerApp\**" />
+    </ItemGroup>
+
 </Project>
